@@ -1,1 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroTech Regenerativa</title>
+    <style>
+        :root {
+            --verde: #2d5a27;
+            --terra: #8b4513;
+            --azul: #0056b3;
+            --bg: #f4f4f4;
+        }
 
+        body { font-family: sans-serif; margin: 0; scroll-behavior: smooth; color: #333; }
+
+        header { background: var(--verde); color: white; padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
+
+        nav { display: none; position: absolute; top: 60px; right: 0; background: var(--verde); width: 100%; }
+        nav.active { display: block; }
+        nav ul { list-style: none; padding: 0; }
+        nav ul li a { display: block; padding: 1rem; color: white; text-decoration: none; }
+
+        .hero { height: 80vh; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('plantação.jpg'); background-size: cover; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center; }
+
+        section { padding: 2rem; }
+
+        .card { background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: 0.3s; }
+        .card:hover { transform: translateY(-5px); border-bottom: 5px solid var(--azul); }
+
+        footer { background: var(--terra); color: white; padding: 2rem; text-align: center; }
+        
+        input, textarea { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; }
+        button { background: var(--azul); color: white; border: none; padding: 10px 20px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo"><strong>AGRO</strong>TECH</div>
+        <button onclick="document.querySelector('nav').classList.toggle('active')">☰</button>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#producao">Produção</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="inicio" class="hero">
+        <h1>Agricultura do Futuro</h1>
+        <p>Eficiência, solo regenerado e lucro sustentável.</p>
+    </section>
+
+    <section id="producao">
+        <h2>Nossas Tecnologias</h2>
+        <div class="card">
+            <h3>Drones de Precisão</h3>
+            <p>Monitoramento de safra em tempo real para redução de insumos.</p>
+        </div>
+        <div class="card">
+            <h3>Sensores IoT</h3>
+            <p>Dados precisos sobre a umidade do solo para economia de água.</p>
+        </div>
+    </section>
+
+    <footer>
+        <h2>Entre em contato</h2>
+        <form id="contatoForm">
+            <input type="text" placeholder="Seu Nome" required>
+            <input type="email" placeholder="Seu E-mail" required>
+            <textarea placeholder="Como podemos ajudar?" required></textarea>
+            <button type="submit">Enviar Mensagem</button>
+        </form>
+    </footer>
+
+    <script>
+        // Validação nativa já ocorre via atributo 'required' no HTML
+        document.getElementById('contatoForm').onsubmit = (e) => {
+            e.preventDefault();
+            alert('Mensagem enviada com sucesso!');
+        };
+    </script>
+</body>
+</html>
