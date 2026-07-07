@@ -3,84 +3,697 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgroTech Regenerativa</title>
+    <meta name="description" content="AgroTech Regenerativa - Tecnologia de ponta para uma agricultura sustentável e lucrativa.">
+    <title>AgroTech Regenerativa | O Futuro do Agro</title>
+    
+    <!-- Fontes e Ícones -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         :root {
-            --verde: #2d5a27;
-            --terra: #8b4513;
-            --azul: #0056b3;
-            --bg: #f4f4f4;
+            --verde-escuro: #1b4332;
+            --verde-medio: #2d6a4f;
+            --verde-claro: #40916c;
+            --terra: #d4a373;
+            --bg-claro: #f8f9fa;
+            --texto: #333333;
+            --texto-claro: #6c757d;
+            --branco: #ffffff;
+            --sombra: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transicao: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        body { font-family: sans-serif; margin: 0; scroll-behavior: smooth; color: #333; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        header { background: var(--verde); color: white; padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
+        html { scroll-behavior: smooth; }
 
-        nav { display: none; position: absolute; top: 60px; right: 0; background: var(--verde); width: 100%; }
-        nav.active { display: block; }
-        nav ul { list-style: none; padding: 0; }
-        nav ul li a { display: block; padding: 1rem; color: white; text-decoration: none; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--texto);
+            background: var(--bg-claro);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-        .hero { height: 80vh; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('plantação.jpg'); background-size: cover; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center; }
+        /* --- HEADER & NAV --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transicao);
+            background: transparent;
+        }
 
-        section { padding: 2rem; }
+        header.scrolled {
+            background: rgba(27, 67, 50, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            padding: 0.7rem 5%;
+        }
 
-        .card { background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: 0.3s; }
-        .card:hover { transform: translateY(-5px); border-bottom: 5px solid var(--azul); }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--branco);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .logo i { color: var(--terra); }
 
-        footer { background: var(--terra); color: white; padding: 2rem; text-align: center; }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            color: var(--branco);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.95rem;
+            position: relative;
+            transition: var(--transicao);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--terra);
+            transition: var(--transicao);
+        }
+
+        nav ul li a:hover::after { width: 100%; }
+
+        .btn-nav {
+            background: var(--terra);
+            color: var(--branco) !important;
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+        }
+        .btn-nav::after { display: none; }
+        .btn-nav:hover { background: #c38d5d; transform: translateY(-2px); }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--branco);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* --- HERO --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(27, 67, 50, 0.8), rgba(45, 106, 79, 0.6)), 
+                        url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--branco);
+            padding: 0 1rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            max-width: 600px;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transicao);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary { background: var(--terra); color: var(--branco); }
+        .btn-primary:hover { background: #c38d5d; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
         
-        input, textarea { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; }
-        button { background: var(--azul); color: white; border: none; padding: 10px 20px; cursor: pointer; }
+        .btn-secondary { background: transparent; color: var(--branco); border: 2px solid var(--branco); }
+        .btn-secondary:hover { background: var(--branco); color: var(--verde-escuro); }
+
+        /* --- SEÇÕES GERAIS --- */
+        section { padding: 6rem 5%; }
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--verde-escuro);
+            margin-bottom: 0.5rem;
+        }
+        .section-title p { color: var(--texto-claro); max-width: 600px; margin: 0 auto; }
+
+        /* --- STATS --- */
+        .stats {
+            background: var(--verde-escuro);
+            color: var(--branco);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+            padding: 4rem 5%;
+        }
+        .stat-item h3 { font-size: 3rem; color: var(--terra); margin-bottom: 0.5rem; }
+        .stat-item p { font-size: 1.1rem; opacity: 0.9; }
+
+        /* --- TECNOLOGIAS (CARDS) --- */
+        .tecnologias-bg { background: var(--bg-claro); }
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--branco);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--sombra);
+            transition: var(--transicao);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--verde-claro), var(--terra));
+            transform: scaleX(0);
+            transition: var(--transicao);
+        }
+
+        .card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .card:hover::before { transform: scaleX(1); }
+
+        .card-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--verde-claro), var(--verde-medio));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: var(--branco);
+        }
+
+        .card h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--verde-escuro); }
+        .card p { color: var(--texto-claro); }
+
+        /* --- SOBRE --- */
+        .sobre {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .sobre-img {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--sombra);
+        }
+        .sobre-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .sobre-texto h2 { font-size: 2.5rem; color: var(--verde-escuro); margin-bottom: 1rem; }
+        .sobre-texto p { margin-bottom: 1rem; color: var(--texto-claro); }
+        .check-list { list-style: none; margin-top: 1.5rem; }
+        .check-list li { margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.8rem; }
+        .check-list i { color: var(--verde-claro); font-size: 1.2rem; }
+
+        /* --- CONTATO --- */
+        .contato-bg {
+            background: linear-gradient(135deg, var(--verde-escuro), var(--verde-medio));
+            color: var(--branco);
+        }
+        .contato-bg .section-title h2 { color: var(--branco); }
+        .contato-bg .section-title p { color: rgba(255,255,255,0.8); }
+
+        .contato-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .contato-info h3 { margin-bottom: 1.5rem; font-size: 1.5rem; }
+        .info-item { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+        .info-item i { font-size: 1.5rem; color: var(--terra); width: 30px; }
+
+        .form-group { margin-bottom: 1.5rem; position: relative; }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 10px;
+            color: var(--branco);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transicao);
+        }
+        .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,0.6); }
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--terra);
+            background: rgba(255,255,255,0.15);
+        }
+        .form-group textarea { min-height: 120px; resize: vertical; }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1rem;
+            background: var(--terra);
+            color: var(--branco);
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transicao);
+        }
+        .btn-submit:hover { background: #c38d5d; transform: translateY(-2px); }
+        .btn-submit:disabled { opacity: 0.7; cursor: not-allowed; }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #0d261a;
+            color: rgba(255,255,255,0.7);
+            padding: 4rem 5% 2rem;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+        }
+        .footer-col h4 { color: var(--branco); margin-bottom: 1.5rem; font-size: 1.2rem; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 0.8rem; }
+        .footer-col a { color: rgba(255,255,255,0.7); text-decoration: none; transition: var(--transicao); }
+        .footer-col a:hover { color: var(--terra); padding-left: 5px; }
+        .social-links { display: flex; gap: 1rem; margin-top: 1rem; }
+        .social-links a {
+            width: 40px; height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            transition: var(--transicao);
+        }
+        .social-links a:hover { background: var(--terra); transform: translateY(-3px); padding-left: 0; }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+        }
+
+        /* --- ANIMAÇÕES --- */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- RESPONSIVIDADE --- */
+        @media (max-width: 992px) {
+            .sobre { grid-template-columns: 1fr; }
+            .contato-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: var(--verde-escuro);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transition: var(--transicao);
+                box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+            }
+            
+            nav.active { right: 0; }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 2.5rem;
+            }
+            
+            nav ul li a { font-size: 1.2rem; }
+
+            .overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.5);
+                z-index: 998;
+                display: none;
+            }
+            .overlay.active { display: block; }
+        }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo"><strong>AGRO</strong>TECH</div>
-        <button onclick="document.querySelector('nav').classList.toggle('active')">☰</button>
-        <nav>
+    <!-- OVERLAY PARA MENU MOBILE -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- HEADER -->
+    <header id="header">
+        <a href="#" class="logo"><i class="fas fa-seedling"></i> AgroTech</a>
+        
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <nav id="navbar">
             <ul>
                 <li><a href="#inicio">Início</a></li>
-                <li><a href="#producao">Produção</a></li>
-                <li><a href="#contato">Contato</a></li>
+                <li><a href="#tecnologias">Tecnologias</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#contato" class="btn-nav">Fale Conosco</a></li>
             </ul>
         </nav>
     </header>
 
+    <!-- HERO -->
     <section id="inicio" class="hero">
-        <h1>Agricultura do Futuro</h1>
-        <p>Eficiência, solo regenerado e lucro sustentável.</p>
-    </section>
-
-    <section id="producao">
-        <h2>Nossas Tecnologias</h2>
-        <div class="card">
-            <h3>Drones de Precisão</h3>
-            <p>Monitoramento de safra em tempo real para redução de insumos.</p>
-        </div>
-        <div class="card">
-            <h3>Sensores IoT</h3>
-            <p>Dados precisos sobre a umidade do solo para economia de água.</p>
+        <h1>Agricultura do Futuro,<br>Colhendo Sustentabilidade</h1>
+        <p>Unimos inteligência artificial, IoT e práticas regenerativas para maximizar sua produção e recuperar a saúde do seu solo.</p>
+        <div class="hero-buttons">
+            <a href="#tecnologias" class="btn btn-primary">Nossas Soluções</a>
+            <a href="#contato" class="btn btn-secondary">Solicitar Demo</a>
         </div>
     </section>
 
+    <!-- STATS -->
+    <section class="stats">
+        <div class="stat-item reveal">
+            <h3>500k+</h3>
+            <p>Hectares Monitorados</p>
+        </div>
+        <div class="stat-item reveal">
+            <h3>35%</h3>
+            <p>Economia de Água</p>
+        </div>
+        <div class="stat-item reveal">
+            <h3>20%</h3>
+            <p>Aumento de Produtividade</p>
+        </div>
+        <div class="stat-item reveal">
+            <h3>100%</h3>
+            <p>Dados em Tempo Real</p>
+        </div>
+    </section>
+
+    <!-- TECNOLOGIAS -->
+    <section id="tecnologias" class="tecnologias-bg">
+        <div class="section-title reveal">
+            <h2>Nossas Tecnologias</h2>
+            <p>Ferramentas de ponta para transformar a gestão da sua fazenda e garantir um futuro próspero.</p>
+        </div>
+        
+        <div class="cards-grid">
+            <div class="card reveal">
+                <div class="card-icon"><i class="fas fa-drone"></i></div> <!-- Nota: 'drone' pode não existir em todas as versões do FA, usaremos helicopter ou plane se falhar, mas drone existe no FA 6 -->
+                <h3>Drones de Precisão</h3>
+                <p>Mapeamento aéreo com câmeras multiespectrais para monitoramento de pragas, saúde da planta e contagem de estande em tempo real.</p>
+            </div>
+            <div class="card reveal">
+                <div class="card-icon"><i class="fas fa-microchip"></i></div>
+                <h3>Sensores IoT</h3>
+                <p>Rede de sensores sem fio que medem umidade do solo, temperatura e nutrientes, automatizando a irrigação onde e quando necessário.</p>
+            </div>
+            <div class="card reveal">
+                <div class="card-icon"><i class="fas fa-brain"></i></div>
+                <h3>Inteligência Artificial</h3>
+                <p>Algoritmos preditivos que analisam dados históricos e climáticos para recomendar a melhor época de plantio e colheita.</p>
+            </div>
+            <div class="card reveal">
+                <div class="card-icon"><i class="fas fa-leaf"></i></div>
+                <h3>Solo Regenerativo</h3>
+                <p>Técnicas de plantio direto e rotação de culturas guiadas por dados para aumentar a matéria orgânica e reter carbono no solo.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOBRE -->
+    <section id="sobre">
+        <div class="sobre">
+            <div class="sobre-img reveal">
+                <img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?auto=format&fit=crop&w=800&q=80" alt="Agrônomo analisando plantação">
+            </div>
+            <div class="sobre-texto reveal">
+                <h2>Por que escolher a AgroTech?</h2>
+                <p>Não somos apenas uma empresa de tecnologia; somos parceiros na sua jornada rumo à agricultura regenerativa. Acreditamos que o lucro e a sustentabilidade devem caminhar juntos.</p>
+                <p>Nossa plataforma integra hardware e software para criar um ecossistema completo de gestão agrícola.</p>
+                <ul class="check-list">
+                    <li><i class="fas fa-check-circle"></i> Suporte técnico especializado 24/7</li>
+                    <li><i class="fas fa-check-circle"></i> Integração com maquinário de qualquer marca</li>
+                    <li><i class="fas fa-check-circle"></i> Relatórios de impacto ambiental automáticos</li>
+                    <li><i class="fas fa-check-circle"></i> ROI comprovado em até 2 safras</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section id="contato" class="contato-bg">
+        <div class="section-title reveal">
+            <h2>Vamos conversar sobre o seu projeto?</h2>
+            <p>Preencha o formulário e nossa equipe de especialistas entrará em contato em até 24 horas.</p>
+        </div>
+
+        <div class="contato-grid">
+            <div class="contato-info reveal">
+                <h3>Informações de Contato</h3>
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Av. da Tecnologia, 1000 - Agrópolis, BR</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+55 (11) 99999-9999</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>contato@agrotech.com.br</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Seg - Sex: 08:00 - 18:00</span>
+                </div>
+            </div>
+
+            <form id="contatoForm" class="reveal">
+                <div class="form-group">
+                    <input type="text" placeholder="Seu Nome Completo" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Seu Melhor E-mail" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" placeholder="WhatsApp (com DDD)">
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="Conte-nos sobre sua fazenda e como podemos ajudar..." required></textarea>
+                </div>
+                <button type="submit" class="btn-submit" id="btnSubmit">
+                    <span>Enviar Mensagem</span>
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
     <footer>
-        <h2>Entre em contato</h2>
-        <form id="contatoForm">
-            <input type="text" placeholder="Seu Nome" required>
-            <input type="email" placeholder="Seu E-mail" required>
-            <textarea placeholder="Como podemos ajudar?" required></textarea>
-            <button type="submit">Enviar Mensagem</button>
-        </form>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4><i class="fas fa-seedling" style="color: var(--terra);"></i> AgroTech</h4>
+                <p style="margin-top: 1rem;">Revolucionando o campo com tecnologia de ponta e práticas regenerativas para um futuro sustentável.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Links Rápidos</h4>
+                <ul>
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#tecnologias">Tecnologias</a></li>
+                    <li><a href="#sobre">Sobre Nós</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Soluções</h4>
+                <ul>
+                    <li><a href="#">Drones e Mapeamento</a></li>
+                    <li><a href="#">Sensores IoT</a></li>
+                    <li><a href="#">Software de Gestão</a></li>
+                    <li><a href="#">Consultoria Agronômica</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Newsletter</h4>
+                <p style="margin-bottom: 1rem;">Receba novidades sobre o agro.</p>
+                <form style="display: flex; gap: 0.5rem;">
+                    <input type="email" placeholder="Seu e-mail" style="padding: 0.8rem; border-radius: 8px; border: none; flex: 1; background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2);">
+                    <button type="submit" style="padding: 0.8rem 1.2rem; background: var(--terra); border: none; border-radius: 8px; color: white; cursor: pointer;"><i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2026 AgroTech Regenerativa. Todos os direitos reservados.</p>
+        </div>
     </footer>
 
     <script>
-        // Validação nativa já ocorre via atributo 'required' no HTML
-        document.getElementById('contatoForm').onsubmit = (e) => {
+        // --- MENU MOBILE ---
+        const menuToggle = document.getElementById('menuToggle');
+        const navbar = document.getElementById('navbar');
+        const overlay = document.getElementById('overlay');
+        const navLinks = document.querySelectorAll('nav ul li a');
+
+        function toggleMenu() {
+            navbar.classList.toggle('active');
+            overlay.classList.toggle('active');
+            // Muda o ícone do hamburger para X
+            const icon = menuToggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        }
+
+        menuToggle.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+        
+        // Fecha o menu ao clicar em um link (mobile)
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (navbar.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        // --- HEADER SCROLL EFFECT ---
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // --- SCROLL REVEAL ANIMATION ---
+        const reveals = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        reveals.forEach(el => revealObserver.observe(el));
+
+        // --- FORMULÁRIO DE CONTATO ---
+        const form = document.getElementById('contatoForm');
+        const btnSubmit = document.getElementById('btnSubmit');
+
+        form.addEventListener('submit', (e) => {
             e.preventDefault();
-            alert('Mensagem enviada com sucesso!');
-        };
+            
+            // Simulação de envio
+            btnSubmit.disabled = true;
+            btnSubmit.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+
+            setTimeout(() => {
+                btnSubmit.innerHTML = '<i class="fas fa-check"></i> Mensagem Enviada!';
+                btnSubmit.style.background = '#40916c'; // Verde de sucesso
+                
+                // Reset após 3 segundos
+                setTimeout(() => {
+                    form.reset();
+                    btnSubmit.disabled = false;
+                    btnSubmit.innerHTML = '<span>Enviar Mensagem</span>';
+                    btnSubmit.style.background = '';
+                }, 3000);
+            }, 1500);
+        });
     </script>
 </body>
 </html>
